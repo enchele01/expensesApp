@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             title: Text("MyExpenses"),
           ),
           body: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
@@ -38,6 +38,45 @@ class MyApp extends StatelessWidget {
                 child: Card(
                   color: Colors.greenAccent,
                   child: Text("Chart"),
+                ),
+              ),
+              Card(
+                elevation: 5,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(labelText: "Title"),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(labelText: "Amount"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.purple,
+                              width: 2,
+                            ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10))),
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            "Add Transaction",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            foregroundColor: Colors.purple,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Column(
