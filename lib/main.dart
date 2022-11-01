@@ -7,6 +7,11 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final titleController = TextEditingController();
+  final amountCOntroller = TextEditingController();
+  // String titleInput = "";
+  // String amountInput = "";
+
   final List<Transaction> transactions = [
     Transaction(
       id: "t1",
@@ -49,9 +54,17 @@ class MyApp extends StatelessWidget {
                     children: [
                       TextField(
                         decoration: InputDecoration(labelText: "Title"),
+                        controller: titleController,
+                        // onChanged: (val) {
+                        //   titleInput = val;
+                        // },
                       ),
                       TextField(
                         decoration: InputDecoration(labelText: "Amount"),
+                        controller: amountCOntroller,
+                        // onChanged: (val) {
+                        //   amountInput = val;
+                        // },
                       ),
                       Container(
                         margin: EdgeInsets.all(10),
@@ -63,7 +76,11 @@ class MyApp extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // print('$titleInput and $amountInput');
+                            print(
+                                '${titleController.text} and ${amountCOntroller.text}');
+                          },
                           child: Text(
                             "Add Transaction",
                             style: TextStyle(
