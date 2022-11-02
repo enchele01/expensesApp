@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter App',
       home: Scaffold(
-          appBar: AppBar(
-            title: Text("MyExpenses"),
-          ),
-          body: Column(
+        appBar: AppBar(
+          title: Text("MyExpenses"),
+        ),
+        body: SingleChildScrollView(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
                 width: double.infinity,
                 child: Card(
                   color: Colors.greenAccent,
-                  child: Text("Chart"),
+                  child: Text("Expenses"),
                 ),
               ),
               UserTransactions(),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

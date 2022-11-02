@@ -18,6 +18,7 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "Title"),
               controller: titleController,
+              keyboardType: TextInputType.text,
               // onChanged: (val) {
               //   titleInput = val;
               // },
@@ -25,6 +26,8 @@ class NewTransaction extends StatelessWidget {
             TextField(
               decoration: InputDecoration(labelText: "Amount"),
               controller: amountController,
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+
               // onChanged: (val) {
               //   amountInput = val;
               // },
@@ -40,7 +43,7 @@ class NewTransaction extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   // print('$titleInput and $amountInput');
-                  print('${titleController.text} and ${amountController.text}');
+                  // print('${titleController.text} and ${amountController.text}');
                   newTransactionHandler(
                       titleController.text, amountController.text);
                 },
