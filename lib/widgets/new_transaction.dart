@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function newTransactionHandler;
@@ -10,8 +11,9 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
+
+  DateTime? _selectedDate;
 
   void submitData() {
     final enteredtitle = titleController.text;
@@ -19,14 +21,32 @@ class _NewTransactionState extends State<NewTransaction> {
 
     if (enteredtitle.isEmpty ||
         enteredAmount.isEmpty ||
-        double.parse(enteredAmount) < 0) {
+        double.parse(enteredAmount) < 0 ||
+        _selectedDate == null) {
       print(enteredtitle);
       print(enteredAmount);
       return;
     }
-    widget.newTransactionHandler(enteredtitle, double.parse(enteredAmount));
+    widget.newTransactionHandler(
+        enteredtitle, double.parse(enteredAmount), _selectedDate);
 
     Navigator.of(context).pop();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(2022),
+            lastDate: DateTime.now())
+        .then((pickedDate) {
+      if (pickedDate == null) {
+        return;
+      }
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -57,6 +77,29 @@ class _NewTransactionState extends State<NewTransaction> {
               // onChanged: (val) {
               //   amountInput = val;
               // },
+            ),
+            Container(
+              height: 70,
+              child: Row(children: [
+                Expanded(
+                  child: Text(
+                    _selectedDate == null
+                        ? 'No date chosen'
+                        : 'Picked Date:${DateFormat.yMd().format(_selectedDate as DateTime)}',
+                  ),
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.purple,
+                  ),
+                  onPressed: _presentDatePicker,
+                  child: Text(
+                    "Choose Date",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                )
+              ]),
             ),
             Container(
               margin: EdgeInsets.all(10),
